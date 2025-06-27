@@ -1,0 +1,29 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["FitnessClassAttendance","Current Active Memberships - Active Accounts","Floor Attendance"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.144.878.0 (25.06)+9cca29236de5114792f4d7188221f91ad4a5cc50
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table FitnessClassAttendance
+ref table DateTableTemplate_cd290147-3651-4561-9264-df4a1898133d
+ref table LocalDateTable_951f4fcb-e58a-4485-aac0-8d6f7092c19b
+ref table LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54
+ref table LocalDateTable_dc8e9960-323f-48b5-9474-3ec2d7a88526
+ref table 'Current Active Memberships - Active Accounts'
+ref table 'Floor Attendance'
+ref table LocalDateTable_3f5c8b45-98ac-4f9e-b529-c0ac88d5b420
+ref table LocalDateTable_c931c697-e5fe-4273-b03e-029514369982
+ref table LocalDateTable_fb359586-0eed-46bb-8abf-f48f542b6dd0
+
+ref cultureInfo en-US
+

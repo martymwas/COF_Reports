@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "COF_Reports"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f19bf852-6f3a-49ea-a1b9-7f609a247c8b"
+  }
+}

@@ -1,0 +1,126 @@
+table FitnessClassAttendance
+	lineageTag: e24f3b98-da1d-487d-a9da-b6b574813aa4
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: f9345668-7499-41a9-8461-c505708f0006
+		summarizeBy: count
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: efb1f7f0-76b7-4c2c-9a90-5edc3c9b962e
+		summarizeBy: none
+		sourceColumn: Start time
+
+		variation Variation
+			isDefault
+			relationship: 7159873c-6218-4db2-b105-cbdcb88d72cc
+			defaultHierarchy: LocalDateTable_951f4fcb-e58a-4485-aac0-8d6f7092c19b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Completion time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 56f0de4e-2611-47ac-83e9-7fb901a0a7d4
+		summarizeBy: none
+		sourceColumn: Completion time
+
+		variation Variation
+			isDefault
+			relationship: 6d52a64d-5abe-458d-a81a-a72d42fc2982
+			defaultHierarchy: LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 7eec41df-f703-4df1-89b6-b3b478c59374
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: string
+		lineageTag: ce8b0fce-0669-4cef-8d5d-c8da61d59a3b
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 138a41c9-3809-41ab-93cd-82363ba2a40e
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 1367b477-9030-418b-bbb9-1536a010708b
+			defaultHierarchy: LocalDateTable_dc8e9960-323f-48b5-9474-3ec2d7a88526.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Class time'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 8c208c85-96bd-4570-bfde-439c3bc8ce54
+		summarizeBy: none
+		sourceColumn: Class time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column Class
+		dataType: string
+		lineageTag: 492e8279-8392-4310-82a9-4a57be655946
+		summarizeBy: none
+		sourceColumn: Class
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Attendance #'
+		dataType: int64
+		formatString: 0
+		lineageTag: 88f41910-4d4c-48e5-9754-9ebec99798ef
+		summarizeBy: sum
+		sourceColumn: Attendance #
+
+		annotation SummarizationSetBy = Automatic
+
+	column Instructor
+		dataType: string
+		lineageTag: 6d82345e-b7ab-4ec9-8ba1-2a932667a698
+		summarizeBy: none
+		sourceColumn: Instructor
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FitnessClassAttendance = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("D:\Trainings\City of Frisco Power Bi\Datasets\2025 Group Ex Attendance Input(1-317).xlsx"), null, true),
+				    Table1_Table = Source{[Item="Table1",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Table1_Table,{{"ID", Int64.Type}, {"Start time", type datetime}, {"Completion time", type datetime}, {"Email", type text}, {"Name", type text}, {"Day", type text}, {"Date", type date}, {"Class time", type time}, {"Class", type text}, {"Attendance #", Int64.Type}, {"Instructor", type text}, {"Subbed for", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Email"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Removed Columns",{"Subbed for"}),
+				    #"Filled Down" = Table.FillDown(#"Removed Columns1",{"Name"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Filled Down", each true)
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

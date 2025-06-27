@@ -1,0 +1,30 @@
+relationship 7159873c-6218-4db2-b105-cbdcb88d72cc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FitnessClassAttendance.'Start time'
+	toColumn: LocalDateTable_951f4fcb-e58a-4485-aac0-8d6f7092c19b.Date
+
+relationship 6d52a64d-5abe-458d-a81a-a72d42fc2982
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FitnessClassAttendance.'Completion time'
+	toColumn: LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54.Date
+
+relationship 1367b477-9030-418b-bbb9-1536a010708b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FitnessClassAttendance.Date
+	toColumn: LocalDateTable_dc8e9960-323f-48b5-9474-3ec2d7a88526.Date
+
+relationship a0483a3d-135c-42cc-8dda-02dc24363eea
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Floor Attendance'.'Start time'
+	toColumn: LocalDateTable_3f5c8b45-98ac-4f9e-b529-c0ac88d5b420.Date
+
+relationship 5fad42d7-06b9-4258-82dd-0354f9105686
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Floor Attendance'.'Completion time'
+	toColumn: LocalDateTable_c931c697-e5fe-4273-b03e-029514369982.Date
+
+relationship d6004486-8125-405b-809f-9de87d0cca18
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Floor Attendance'.Date
+	toColumn: LocalDateTable_fb359586-0eed-46bb-8abf-f48f542b6dd0.Date
+
