@@ -6,24 +6,33 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["FitnessClassAttendance","Current Active Memberships - Active Accounts","Floor Attendance"]
+annotation PBI_QueryOrder = ["2025 Group Ex Attendance","Current Active Memberships - Active Accounts","Fitness Floor Attendance Input March 2025","Membership Scans (Terminal) by Date","Current Active Memberships - Active Members"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.144.878.0 (25.06)+9cca29236de5114792f4d7188221f91ad4a5cc50
+annotation PBIDesktopVersion = 2.144.1155.0 (25.06)+46435b07013d2a234d7fd007083a9e70b8e79f1c
 
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table FitnessClassAttendance
+ref table '2025 Group Ex Attendance'
 ref table DateTableTemplate_cd290147-3651-4561-9264-df4a1898133d
 ref table LocalDateTable_951f4fcb-e58a-4485-aac0-8d6f7092c19b
 ref table LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54
 ref table LocalDateTable_dc8e9960-323f-48b5-9474-3ec2d7a88526
 ref table 'Current Active Memberships - Active Accounts'
-ref table 'Floor Attendance'
-ref table LocalDateTable_3f5c8b45-98ac-4f9e-b529-c0ac88d5b420
-ref table LocalDateTable_c931c697-e5fe-4273-b03e-029514369982
-ref table LocalDateTable_fb359586-0eed-46bb-8abf-f48f542b6dd0
+ref table 'Fitness Floor Attendance Input March 2025'
+ref table LocalDateTable_031f935b-9961-4a3d-a86a-e8ccca35e692
+ref table LocalDateTable_5ab7429e-de9d-4df0-9259-1d755aa5b1f5
+ref table LocalDateTable_c59421bc-a1f2-4d1b-844c-b3be7ac6dc89
+ref table Calendar
+ref table 'Membership Scans (Terminal) by Date'
+ref table LocalDateTable_dba2b97d-efbf-472d-b3fb-2a46b193ac9d
+ref table LocalDateTable_5a597175-e49e-415b-ad3d-58a56fb062ee
+ref table 'Current Active Memberships - Active Members'
+ref table LocalDateTable_19cc5006-3b4b-493f-8d1f-83e2f0dc332b
+ref table LocalDateTable_a7c01319-ebb4-4d69-bace-52b20afa1778
+ref table LocalDateTable_2169566b-b9c8-47a6-b914-830d91ea3fa2
+ref table LocalDateTable_bae1b52c-409d-4a4d-967e-9d1558dad8a2
 
 ref cultureInfo en-US
 

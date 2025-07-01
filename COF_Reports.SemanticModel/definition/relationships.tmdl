@@ -1,30 +1,60 @@
 relationship 7159873c-6218-4db2-b105-cbdcb88d72cc
 	joinOnDateBehavior: datePartOnly
-	fromColumn: FitnessClassAttendance.'Start time'
+	fromColumn: '2025 Group Ex Attendance'.'Start time'
 	toColumn: LocalDateTable_951f4fcb-e58a-4485-aac0-8d6f7092c19b.Date
 
 relationship 6d52a64d-5abe-458d-a81a-a72d42fc2982
 	joinOnDateBehavior: datePartOnly
-	fromColumn: FitnessClassAttendance.'Completion time'
+	fromColumn: '2025 Group Ex Attendance'.'Completion time'
 	toColumn: LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54.Date
 
 relationship 1367b477-9030-418b-bbb9-1536a010708b
 	joinOnDateBehavior: datePartOnly
-	fromColumn: FitnessClassAttendance.Date
+	fromColumn: '2025 Group Ex Attendance'.Date
 	toColumn: LocalDateTable_dc8e9960-323f-48b5-9474-3ec2d7a88526.Date
 
-relationship a0483a3d-135c-42cc-8dda-02dc24363eea
+relationship 7420a82c-fa93-4ee7-bb4c-ff5f334d6d5d
 	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Floor Attendance'.'Start time'
-	toColumn: LocalDateTable_3f5c8b45-98ac-4f9e-b529-c0ac88d5b420.Date
+	fromColumn: 'Fitness Floor Attendance Input March 2025'.'Start time'
+	toColumn: LocalDateTable_031f935b-9961-4a3d-a86a-e8ccca35e692.Date
 
-relationship 5fad42d7-06b9-4258-82dd-0354f9105686
+relationship 13c09a31-9740-4bee-852f-ba76339ae962
 	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Floor Attendance'.'Completion time'
-	toColumn: LocalDateTable_c931c697-e5fe-4273-b03e-029514369982.Date
+	fromColumn: 'Fitness Floor Attendance Input March 2025'.'Completion time'
+	toColumn: LocalDateTable_5ab7429e-de9d-4df0-9259-1d755aa5b1f5.Date
 
-relationship d6004486-8125-405b-809f-9de87d0cca18
+relationship 8659b196-1945-41bf-ba93-29e9c5385c96
 	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Floor Attendance'.Date
-	toColumn: LocalDateTable_fb359586-0eed-46bb-8abf-f48f542b6dd0.Date
+	fromColumn: 'Fitness Floor Attendance Input March 2025'.Date
+	toColumn: LocalDateTable_c59421bc-a1f2-4d1b-844c-b3be7ac6dc89.Date
+
+relationship 87542b51-b60c-4f2a-abd4-3f117c5b04e6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Membership Scans (Terminal) by Date'.CreatedDate
+	toColumn: LocalDateTable_dba2b97d-efbf-472d-b3fb-2a46b193ac9d.Date
+
+relationship d827d2ad-7a2e-448a-8487-8e3969a48201
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Membership Scans (Terminal) by Date'._FilterResult__CreatedDate_GroupValue_
+	toColumn: LocalDateTable_5a597175-e49e-415b-ad3d-58a56fb062ee.Date
+
+relationship 63b6d857-bd42-4f34-b4f1-c605ba6fe7d7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Current Active Memberships - Active Members'.'Activation DateTime'
+	toColumn: LocalDateTable_19cc5006-3b4b-493f-8d1f-83e2f0dc332b.Date
+
+relationship e54af141-963b-4f6c-b3a4-a6260677bff8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Current Active Memberships - Active Members'.'Expiry Date'
+	toColumn: LocalDateTable_a7c01319-ebb4-4d69-bace-52b20afa1778.Date
+
+relationship 4df17150-a814-437d-981d-cffe4d323e5e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.Date
+	toColumn: LocalDateTable_2169566b-b9c8-47a6-b914-830d91ea3fa2.Date
+
+relationship b46fc053-866b-48b0-a8fa-fefcb3e085c5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.'Start of Week'
+	toColumn: LocalDateTable_bae1b52c-409d-4a4d-967e-9d1558dad8a2.Date
 

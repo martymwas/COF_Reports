@@ -1,0 +1,111 @@
+table 'Fitness Floor Attendance Input March 2025'
+	lineageTag: bdac1777-0e01-4c27-b398-151517f659be
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: bfc5dd70-53b0-4c64-956e-d94606bb3941
+		summarizeBy: count
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ba60b422-ab67-4443-8358-3c18bc852bdb
+		summarizeBy: none
+		sourceColumn: Start time
+
+		variation Variation
+			isDefault
+			relationship: 7420a82c-fa93-4ee7-bb4c-ff5f334d6d5d
+			defaultHierarchy: LocalDateTable_031f935b-9961-4a3d-a86a-e8ccca35e692.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Completion time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fc27833e-3a79-45c6-bfe8-3dbc76e50dad
+		summarizeBy: none
+		sourceColumn: Completion time
+
+		variation Variation
+			isDefault
+			relationship: 13c09a31-9740-4bee-852f-ba76339ae962
+			defaultHierarchy: LocalDateTable_5ab7429e-de9d-4df0-9259-1d755aa5b1f5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: string
+		lineageTag: 331c4d23-0003-41ec-8b63-bdac7ecf1a97
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 411baca0-ee54-4890-9619-f369a779b74e
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 8659b196-1945-41bf-ba93-29e9c5385c96
+			defaultHierarchy: LocalDateTable_c59421bc-a1f2-4d1b-844c-b3be7ac6dc89.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: ac6a2c54-dcac-43fa-9cc7-08e070018456
+		summarizeBy: none
+		sourceColumn: Time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column Activities
+		dataType: string
+		lineageTag: f14b2941-2cb0-4d6d-9e93-204af644b2a9
+		summarizeBy: none
+		sourceColumn: Activities
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attendance
+		dataType: double
+		lineageTag: 6843edcf-8387-4edd-9dd1-bba9e1f24799
+		summarizeBy: sum
+		sourceColumn: Attendance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Fitness Floor Attendance Input March 2025' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("D:\Trainings\City of Frisco Power Bi\Datasets\Fitness Floor Attendance Input March 2025 - Current(1-564).xlsx"), null, true),
+				    Table1_Table = Source{[Item="Table1",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Table1_Table,{{"ID", Int64.Type}, {"Start time", type datetime}, {"Completion time", type datetime}, {"Email", type text}, {"Name", type any}, {"Day", type text}, {"Date", type date}, {"Time", type time}, {"Pickleball", Int64.Type}, {"Precor", Int64.Type}, {"LF Cardio", type number}, {"Queenax", Int64.Type}, {"Fitness Floor", Int64.Type}, {"Free Weights", Int64.Type}, {"Studios", Int64.Type}, {"Gold Medal", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Name", "Email"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Removed Columns",{"ID", "Start time", "Completion time", "Day", "Date", "Time", "Pickleball", "Precor", "LF Cardio", "Queenax", "Fitness Floor", "Free Weights", "Studios", "Gold Medal"}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Reordered Columns", {"ID", "Start time", "Completion time", "Day", "Date", "Time"}, "Attribute", "Value"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "Activities"}, {"Value", "Attendance"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

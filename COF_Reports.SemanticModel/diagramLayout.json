@@ -10,10 +10,75 @@
       "nodes": [
         {
           "location": {
-            "x": 0,
-            "y": 0
+            "x": 11,
+            "y": 16.1875
           },
-          "nodeIndex": "FitnessClassAttendance",
+          "nodeIndex": "Current Active Memberships - Active Accounts",
+          "nodeLineageTag": "6c6b176a-feb2-4d31-a60c-db4a6d45167a",
+          "size": {
+            "height": 309,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 547,
+            "y": 23.1875
+          },
+          "nodeIndex": "Fitness Floor Attendance Input March 2025",
+          "nodeLineageTag": "bdac1777-0e01-4c27-b398-151517f659be",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 802,
+            "y": 18.6875
+          },
+          "nodeIndex": "Calendar",
+          "nodeLineageTag": "83626479-fec9-4d6b-ad6a-82a4f533d0ab",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1069,
+            "y": 16.4375
+          },
+          "nodeIndex": "Membership Scans (Terminal) by Date",
+          "nodeLineageTag": "f4ccd4ea-be16-444b-bfae-905f42571637",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1342,
+            "y": 10.0625
+          },
+          "nodeIndex": "Current Active Memberships - Active Members",
+          "nodeLineageTag": "dea4719c-81a9-49cc-a9c6-506f184ae0f3",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 279,
+            "y": 15.1875
+          },
+          "nodeIndex": "2025 Group Ex Attendance",
           "size": {
             "height": 300,
             "width": 234
