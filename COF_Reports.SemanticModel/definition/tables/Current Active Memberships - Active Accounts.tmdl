@@ -1,23 +1,73 @@
 table 'Current Active Memberships - Active Accounts'
 	lineageTag: 6c6b176a-feb2-4d31-a60c-db4a6d45167a
 
-	column Attribute
+	column 'Contact ID'
 		dataType: string
-		lineageTag: 45a97a7b-6f6f-4f00-8bad-8b11dfb850db
+		lineageTag: 127093fe-139e-441c-9c48-1ce422f93a1f
 		summarizeBy: none
-		sourceColumn: Attribute
+		sourceColumn: Contact ID
 
 		annotation SummarizationSetBy = Automatic
 
-	column Value
+	column 'Activation DateTime'
+		dataType: string
+		lineageTag: d6bb421a-d645-49cc-abc6-e22d61b68a8c
+		summarizeBy: none
+		sourceColumn: Activation DateTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expiry Date'
+		dataType: string
+		lineageTag: 8574c8ed-c375-47d8-a538-8d31cd8d4ca1
+		summarizeBy: none
+		sourceColumn: Expiry Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Residency
+		dataType: string
+		lineageTag: 9056429f-8c29-4bd0-983d-735253ca7059
+		summarizeBy: none
+		sourceColumn: Residency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
 		dataType: double
-		lineageTag: 928b1d6d-560e-4ccb-a032-354face04387
+		lineageTag: cad66f61-e6cf-44cf-bfc6-ccfe93123923
 		summarizeBy: sum
-		sourceColumn: Value
+		sourceColumn: Age
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Gender
+		dataType: string
+		lineageTag: 918b86ac-5ab4-4868-8b06-233cda6dfacc
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Price
+		dataType: double
+		lineageTag: cdac507b-4b75-4b77-ae24-c5df9eb22e88
+		summarizeBy: sum
+		sourceColumn: Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Name
+		dataType: string
+		lineageTag: 1868857c-45eb-4405-b6e0-4fe65067fbcf
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
 
 	partition 'Current Active Memberships - Active Accounts' = m
 		mode: import
@@ -25,12 +75,12 @@ table 'Current Active Memberships - Active Accounts'
 				let
 				    Source = Csv.Document(File.Contents("D:\Trainings\City of Frisco Power Bi\Datasets\Current Active Memberships - Active Accounts.csv"),[Delimiter=",", Columns=10, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Removed Columns" = Table.RemoveColumns(#"Promoted Headers",{"Contact ID", "First Name", "Last Name", "Activation DateTime", "Expiry Date", "Residency", "Age", "Name"}),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"Price", type number}}),
-				    #"Pivoted Column" = Table.Pivot(#"Changed Type", List.Distinct(#"Changed Type"[Gender]), "Gender", "Price", List.Sum),
-				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Pivoted Column", {}, "Attribute", "Value")
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Age", type number}, {"Price", type number}}),
+				    #"Sorted Rows" = Table.Sort(#"Changed Type",{{"Activation DateTime", Order.Descending}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Sorted Rows",{"First Name", "Last Name"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Columns", each true)
 				in
-				    #"Unpivoted Columns"
+				    #"Filtered Rows"
 
 	annotation PBI_NavigationStepName = Navigation
 

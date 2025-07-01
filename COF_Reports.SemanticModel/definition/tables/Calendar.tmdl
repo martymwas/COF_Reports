@@ -1,0 +1,167 @@
+table Calendar
+	lineageTag: 83626479-fec9-4d6b-ad6a-82a4f533d0ab
+
+	column Date
+		formatString: General Date
+		lineageTag: b2c753b8-e674-4a88-acbc-eabf8d5cf580
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 4df17150-a814-437d-981d-cffe4d323e5e
+			defaultHierarchy: LocalDateTable_2169566b-b9c8-47a6-b914-830d91ea3fa2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 72cfa8ee-f6c0-4694-aeaa-694cbbab63c4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		formatString: 0
+		lineageTag: 9c329351-7620-42b0-b7f5-76b00673a482
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		lineageTag: 7f8cc0d7-860f-4a44-9a51-02524f196188
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year'
+		lineageTag: 62f40666-ed3f-41cd-b5b9-d0113612101d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: c3786b65-3b8c-402a-a026-a6f0ffd7043b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday
+		lineageTag: e30c672c-0129-42f2-90ad-b69a6e077c75
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekday]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekday Short'
+		lineageTag: d74f0a92-6066-441d-ac1d-a7d68e955329
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Weekday Short]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weekday Number'
+		formatString: 0
+		lineageTag: 5f88aec0-fda5-4086-8877-34c3508c0dd7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Weekday Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		formatString: 0
+		lineageTag: e44e5604-2aab-49f6-9226-04f18dbbd4f6
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		formatString: 0
+		lineageTag: 3cf2f085-219f-4729-9cab-2ccc9ba80ab2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Year'
+		lineageTag: 014b6a1c-dc48-4413-ae32-44ff515df3b9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day of Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Is Weekend'
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: eb742ae3-2117-423e-b5dc-2558ebbd54e0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Is Weekend]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year-Month
+		lineageTag: c1ba4616-de91-4c98-a9ff-a14b1bc58218
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year-Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start of Week'
+		formatString: General Date
+		lineageTag: bb7a00e1-e264-4ec9-83a8-3a9c208894b5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Start of Week]
+
+		variation Variation
+			isDefault
+			relationship: b46fc053-866b-48b0-a8fa-fefcb3e085c5
+			defaultHierarchy: LocalDateTable_bae1b52c-409d-4a4d-967e-9d1558dad8a2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar = calculated
+		mode: import
+		source = ```
+				
+				ADDCOLUMNS (
+				    CALENDAR (DATE(2017, 1, 1), DATE(2025, 12, 31)),
+				    "Year", YEAR([Date]),
+				    "Month Number", MONTH([Date]),
+				    "Month Name", FORMAT([Date], "MMMM"),
+				    "Month Year", FORMAT([Date], "MMM YYYY"),
+				    "Quarter", "Q" & FORMAT([Date], "Q"),
+				    "Weekday", FORMAT([Date], "dddd"),
+				    "Weekday Short", FORMAT([Date], "ddd"),
+				    "Weekday Number", WEEKDAY([Date], 2),  -- Monday = 1, Sunday = 7
+				    "Week Number", WEEKNUM([Date], 2),     -- ISO week (Monday-start)
+				    "Day", DAY([Date]),
+				    "Day of Year", FORMAT([Date], "DDD"),
+				    "Is Weekend", IF(WEEKDAY([Date], 2) >= 6, TRUE(), FALSE()),
+				    "Year-Month", FORMAT([Date], "YYYY-MM"),
+				    "Start of Week", [Date] - WEEKDAY([Date], 2) + 1
+				)
+				
+				```
+
+	annotation PBI_Id = 796fe74484e645ec91171f70d27125e8
+

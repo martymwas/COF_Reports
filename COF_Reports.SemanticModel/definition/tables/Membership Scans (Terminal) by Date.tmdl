@@ -1,0 +1,81 @@
+table 'Membership Scans (Terminal) by Date'
+	lineageTag: f4ccd4ea-be16-444b-bfae-905f42571637
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9ae1d4c4-398b-4638-8334-8ccb2241ae7c
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		variation Variation
+			isDefault
+			relationship: 87542b51-b60c-4f2a-abd4-3f117c5b04e6
+			defaultHierarchy: LocalDateTable_dba2b97d-efbf-472d-b3fb-2a46b193ac9d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b67f3e5-5df2-48c6-8644-9caaa2d79f5e
+		summarizeBy: sum
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 2c4b39c7-ea16-42cf-ae6a-1929705bcdb2
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subject
+		dataType: string
+		lineageTag: 0d29633f-50ed-4898-8e2e-00a921637fc0
+		summarizeBy: none
+		sourceColumn: Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name_1
+		dataType: string
+		lineageTag: ff6078db-f7b7-494a-886a-a7fa5defcae6
+		summarizeBy: none
+		sourceColumn: Name_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column _FilterResult__CreatedDate_GroupValue_
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e7e110f3-5738-4ed2-adee-eb9200a6f647
+		summarizeBy: none
+		sourceColumn: _FilterResult__CreatedDate_GroupValue_
+
+		variation Variation
+			isDefault
+			relationship: d827d2ad-7a2e-448a-8487-8e3969a48201
+			defaultHierarchy: LocalDateTable_5a597175-e49e-415b-ad3d-58a56fb062ee.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'Membership Scans (Terminal) by Date' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Trainings\City of Frisco Power Bi\Datasets\Membership Scans (Terminal) by Date.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CreatedDate", type datetime}, {"Change  Status Date", type text}, {"Full Name Simple", type text}, {"Age", Int64.Type}, {"Name", type text}, {"Subject", type text}, {"Name_1", type text}, {"_FilterResult__CreatedDate_GroupValue_", type date}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Change  Status Date", "Full Name Simple"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

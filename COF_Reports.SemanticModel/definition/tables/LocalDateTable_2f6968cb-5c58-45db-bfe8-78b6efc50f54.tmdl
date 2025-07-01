@@ -6,7 +6,6 @@ table LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54
 	column Date
 		dataType: dateTime
 		isHidden
-		formatString: General Date
 		lineageTag: a2b0c507-3899-41ab-a101-8461fb4bb073
 		dataCategory: PaddedDateTableDates
 		summarizeBy: none
@@ -18,7 +17,6 @@ table LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54
 	column Year = YEAR([Date])
 		dataType: int64
 		isHidden
-		formatString: 0
 		lineageTag: 72b2c29e-0bbf-4fbe-8bba-cdc6b81e4bd6
 		dataCategory: Years
 		summarizeBy: none
@@ -30,7 +28,6 @@ table LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54
 	column MonthNo = MONTH([Date])
 		dataType: int64
 		isHidden
-		formatString: 0
 		lineageTag: 48302c4c-0065-41e2-a1ea-31ba9437c308
 		dataCategory: MonthOfYear
 		summarizeBy: none
@@ -54,7 +51,6 @@ table LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54
 	column QuarterNo = INT(([MonthNo] + 2) / 3)
 		dataType: int64
 		isHidden
-		formatString: 0
 		lineageTag: 16cb4181-29e4-4acc-9802-c234cb5612a1
 		dataCategory: QuarterOfYear
 		summarizeBy: none
@@ -78,7 +74,6 @@ table LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54
 	column Day = DAY([Date])
 		dataType: int64
 		isHidden
-		formatString: 0
 		lineageTag: 9e65ff4a-d78e-4bcf-b0ee-c364317168c9
 		dataCategory: DayOfMonth
 		summarizeBy: none
@@ -110,7 +105,7 @@ table LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54
 
 	partition LocalDateTable_2f6968cb-5c58-45db-bfe8-78b6efc50f54 = calculated
 		mode: import
-		source = Calendar(Date(Year(MIN('FitnessClassAttendance'[Completion time])), 1, 1), Date(Year(MAX('FitnessClassAttendance'[Completion time])), 12, 31))
+		source = Calendar(Date(Year(MIN('2025 Group Ex Attendance'[Completion time])), 1, 1), Date(Year(MAX('2025 Group Ex Attendance'[Completion time])), 12, 31))
 
 	annotation __PBI_LocalDateTable = true
 

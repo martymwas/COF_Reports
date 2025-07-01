@@ -1,0 +1,115 @@
+table 'Current Active Memberships - Active Members'
+	lineageTag: dea4719c-81a9-49cc-a9c6-506f184ae0f3
+
+	column 'Contact ID'
+		dataType: string
+		lineageTag: 9ed3a587-88da-4dd8-bb65-934773068396
+		summarizeBy: none
+		sourceColumn: Contact ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: 9275be0d-b11e-4ddd-9540-e856b2682648
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: 7fa026d0-f550-4b13-b1fa-9fce9dafd7fe
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Activation DateTime'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: cfe24382-7ce8-44c3-aef6-c2f0d7185404
+		summarizeBy: none
+		sourceColumn: Activation DateTime
+
+		variation Variation
+			isDefault
+			relationship: 63b6d857-bd42-4f34-b4f1-c605ba6fe7d7
+			defaultHierarchy: LocalDateTable_19cc5006-3b4b-493f-8d1f-83e2f0dc332b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expiry Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f77cbd05-20f5-4e04-ac83-97a98efc1451
+		summarizeBy: none
+		sourceColumn: Expiry Date
+
+		variation Variation
+			isDefault
+			relationship: e54af141-963b-4f6c-b3a4-a6260677bff8
+			defaultHierarchy: LocalDateTable_a7c01319-ebb4-4d69-bace-52b20afa1778.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Residency
+		dataType: string
+		lineageTag: ccbec850-6b03-44f3-8a65-a03d922d2f49
+		summarizeBy: none
+		sourceColumn: Residency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d6a6956-0fd1-4a67-bb90-fe88527da417
+		summarizeBy: sum
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: ac5c5f7c-ce3e-4776-9210-6bb841f795ee
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Price
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 6f824544-a47b-45de-8521-e5d1ecb2c9f8
+		summarizeBy: sum
+		sourceColumn: Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Name
+		dataType: string
+		lineageTag: 88e21bfb-e595-483c-b0ba-bba32a5a94e1
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Current Active Memberships - Active Members' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Trainings\City of Frisco Power Bi\Datasets\Current Active Memberships - Active Members.csv"),[Delimiter=",", Columns=10, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Contact ID", type text}, {"First Name", type text}, {"Last Name", type text}, {"Activation DateTime", type datetime}, {"Expiry Date", type date}, {"Residency", type text}, {"Age", Int64.Type}, {"Gender", type text}, {"Price", Currency.Type}, {"Name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
